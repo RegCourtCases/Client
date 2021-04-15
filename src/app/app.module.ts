@@ -33,6 +33,12 @@ import { DocumentCreateComponent } from './components/document-create/document-c
 import { ArticleCreateComponent } from './components/article-create/article-create.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { ArticleEditComponent } from './components/article-edit/article-edit.component';
+import { PersonService } from './services/person.service';
+import { HttpClientModule } from '@angular/common/http';
+
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { DocumentService } from './services/document.service';
+import { EmptyToNullDirective } from './directives/empty-to-null.directive';
 
 @NgModule({
   declarations: [
@@ -50,6 +56,7 @@ import { ArticleEditComponent } from './components/article-edit/article-edit.com
     ArticleCreateComponent,
     ArticleListComponent,
     ArticleEditComponent,
+    EmptyToNullDirective,
   ],
   imports: [
     BrowserModule,
@@ -69,8 +76,10 @@ import { ArticleEditComponent } from './components/article-edit/article-edit.com
     MatCheckboxModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    HttpClientModule,
+    VirtualScrollerModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, PersonService, DocumentService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
