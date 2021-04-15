@@ -3,7 +3,7 @@
 <form [formGroup]="form">
   <mat-form-field appearance="outline" class="mr-16">
     <mat-label>Тип лица</mat-label>
-    <mat-select formControlName="typePerson">
+    <mat-select formControlName="isLegal">
       <mat-option [value]="0">Физ. лицо</mat-option>
       <mat-option [value]="1">Юр. лицо</mat-option>
     </mat-select>
@@ -32,7 +32,7 @@
   <mat-form-field
     appearance="outline"
     class="mr-16"
-    *ngIf="form.controls.typePerson.value === 0"
+    *ngIf="form.controls.isLegal.value === 0"
   >
     <mat-label>Паспортные данные</mat-label>
     <input matInput formControlName="passportData" />
@@ -41,7 +41,7 @@
   <mat-form-field
     appearance="outline"
     class="mr-16"
-    *ngIf="form.controls.typePerson.value === 0"
+    *ngIf="form.controls.isLegal.value === 0"
   >
     <mat-label>Дата рождения</mat-label>
     <input matInput formControlName="dateBirth" type="date" emptyToNull />

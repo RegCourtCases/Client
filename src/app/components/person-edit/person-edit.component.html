@@ -1,1 +1,67 @@
-<p>person-edit works!</p>
+<h1>Изменение лица</h1>
+
+<ng-container *ngIf="loaded; else loader">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>Тип лица</mat-label>
+      <input
+        matInput
+        readonly
+        [value]="form.controls.isLegal.value === 0 ? 'Физ. лицо' : 'Юр. лицо'"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>Короткое название</mat-label>
+      <input matInput formControlName="shortName" emptyToNull />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>Полное название</mat-label>
+      <input matInput required formControlName="fullName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Адрес</mat-label>
+      <input matInput formControlName="address" emptyToNull />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>ИНН</mat-label>
+      <input matInput formControlName="tin" emptyToNull />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="mr-16"
+      *ngIf="form.controls.isLegal.value === 0"
+    >
+      <mat-label>Паспортные данные</mat-label>
+      <input matInput formControlName="passportData" />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="mr-16"
+      *ngIf="form.controls.isLegal.value === 0"
+    >
+      <mat-label>Дата рождения</mat-label>
+      <input matInput formControlName="dateBirth" type="date" emptyToNull />
+    </mat-form-field>
+
+    <div>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="form.invalid || form.pristine"
+        class="mt-16"
+        (click)="edit()"
+      >
+        Изменить
+      </button>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader>
+  <mat-spinner style="margin: 5rem auto"></mat-spinner>
+</ng-template>

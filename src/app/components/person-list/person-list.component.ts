@@ -25,4 +25,8 @@ export class PersonListComponent implements OnInit {
         this.persons = p;
       });
   }
+
+  deletePerson(personId: number) {
+    this.persons = this.persons.filter((p) => p.personId != personId);
+  }
 }
