@@ -1,0 +1,60 @@
+<h1>Добавление лица</h1>
+
+<form [formGroup]="form">
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Тип лица</mat-label>
+    <mat-select formControlName="typePerson">
+      <mat-option [value]="0">Физ. лицо</mat-option>
+      <mat-option [value]="1">Юр. лицо</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Короткое название</mat-label>
+    <input matInput formControlName="shortName" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Полное название</mat-label>
+    <input matInput required formControlName="fullName" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+    <mat-label>Адрес</mat-label>
+    <input matInput formControlName="address" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>ИНН</mat-label>
+    <input matInput formControlName="tin" />
+  </mat-form-field>
+
+  <mat-form-field
+    appearance="outline"
+    class="mr-16"
+    *ngIf="form.controls.typePerson.value === 0"
+  >
+    <mat-label>Паспортные данные</mat-label>
+    <input matInput formControlName="passportData" />
+  </mat-form-field>
+
+  <mat-form-field
+    appearance="outline"
+    class="mr-16"
+    *ngIf="form.controls.typePerson.value === 0"
+  >
+    <mat-label>Дата рождения</mat-label>
+    <input matInput formControlName="dateBirth" type="date" />
+  </mat-form-field>
+
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      class="mt-16"
+    >
+      Добавить
+    </button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<h1>Добавление статьи в документ УК РФ</h1>
+
+<form [formGroup]="form">
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Заголовок</mat-label>
+    <input matInput required formControlName="title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+    <mat-label>Полное название</mat-label>
+    <textarea matInput required formControlName="text"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Класс экспертиз</mat-label>
+    <input matInput formControlName="expertiseClass" />
+  </mat-form-field>
+
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      class="mt-16"
+    >
+      Добавить
+    </button>
+  </div>
+</form>
