@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DocumentService } from 'src/app/services/document.service';
 
 @Component({
   selector: 'app-document-create',
@@ -14,7 +16,17 @@ export class DocumentCreateComponent implements OnInit {
     isExpertise: [false],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private documentService: DocumentService
+  ) {}
 
   ngOnInit(): void {}
+
+  create() {
+    this.documentService.createOrEditDocument(this.form.value).subscribe(() => {
+      this.router.navigate(['/documents']);
+    });
+  }
 }

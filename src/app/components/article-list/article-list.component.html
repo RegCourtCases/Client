@@ -1,10 +1,10 @@
-<h1>Список статей документа УК РФ</h1>
+<h1>Список статей документа</h1>
 <div class="text-align-center">
   <button
     mat-flat-button
     color="primary"
     class="mb-16"
-    routerLink="/document/view/123/article/create"
+    [routerLink]="['./article/create']"
   >
     Добавить статью
   </button>
@@ -17,33 +17,44 @@
   </mat-form-field>
 </div>
 
-<div class="d-flex d-flex-center mt-16">
-  <div class="d-flex">
-    <div class="d-flex d-flex-baseline" style="width: 100%">
-      <h2 class="m-0 clip">
-        Статья 228. Незаконные приобретение, хранение, перевозка, изготовле ние,
-        переработка наркотических средств, психотропных веществ или их аналогов,
-        а также незаконные приобретение, хранение, перевозка растений,
-        содержащих наркотические средства или психотропные вещества, либо их
-        частей, содержащих наркотические средства или психотропные вещества
-      </h2>
+<ng-container *ngIf="articles; else loader">
+  <virtual-scroller #scroll [items]="articles" [parentScroll]="scroll.window">
+    <div #container>
+      <div
+        class="d-flex d-flex-center mt-16"
+        *ngFor="let article of scroll.viewPortItems"
+      >
+        <div class="d-flex">
+          <div class="d-flex d-flex-baseline" style="width: 100%">
+            <h2 class="m-0 clip">
+              {{ article.title }}
+            </h2>
+          </div>
+          <div class="d-flex d-flex-baseline" *ngIf="article.expertiseClass">
+            <h5 class="m-0">
+              Класс экспертизы <b>{{ article.expertiseClass }}</b>
+            </h5>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="d-flex">
+          <button mat-icon-button (click)="delete(article.articleId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button
+            mat-mini-fab
+            color="accent"
+            class="ml-8"
+            [routerLink]="['./article/edit/', article.articleId]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="d-flex d-flex-baseline">
-      <h5 class="m-0">Класс экспертизы <b>Баллистика</b></h5>
-    </div>
-  </div>
-  <div class="spacer"></div>
-  <div class="d-flex">
-    <button mat-icon-button>
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button
-      mat-mini-fab
-      color="accent"
-      class="ml-8"
-      routerLink="/document/view/123/article/edit/123"
-    >
-      <mat-icon>edit</mat-icon>
-    </button>
-  </div>
-</div>
+  </virtual-scroller>
+</ng-container>
+
+<ng-template #loader>
+  <mat-spinner style="margin: 5rem auto"></mat-spinner>
+</ng-template>

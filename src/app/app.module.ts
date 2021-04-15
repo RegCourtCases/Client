@@ -39,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { DocumentService } from './services/document.service';
 import { EmptyToNullDirective } from './directives/empty-to-null.directive';
+import { ArticleService } from './services/article.service';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,7 @@ import { EmptyToNullDirective } from './directives/empty-to-null.directive';
     HttpClientModule,
     VirtualScrollerModule,
   ],
-  providers: [DatePipe, PersonService, DocumentService],
+  providers: [DatePipe, PersonService, DocumentService, ArticleService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

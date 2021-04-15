@@ -39,6 +39,7 @@ export class PersonEditComponent implements OnInit {
 
   getPerson() {
     this.personService.getPerson(this.form.value.personId).subscribe((p) => {
+      p.dateBirth = p.dateBirth.slice(0, 10);
       this.form.patchValue(p);
       this.loaded = true;
     });

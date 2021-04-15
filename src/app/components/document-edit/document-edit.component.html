@@ -1,1 +1,37 @@
-<p>document-edit works!</p>
+<h1>Изменение документа</h1>
+
+<ng-container *ngIf="loaded; else loader">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>Короткий заголовок</mat-label>
+      <input matInput formControlName="shortTitle" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Полный заголовок</mat-label>
+      <input matInput required formControlName="fullTitle" />
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isCaseArticle"
+      >Может закрепляется за делом?</mat-checkbox
+    >
+    <br />
+    <mat-checkbox formControlName="isExpertise"
+      >Является экспертизой?</mat-checkbox
+    >
+    <div>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="form.invalid || form.pristine"
+        class="mt-16"
+        (click)="edit()"
+      >
+        Изменить
+      </button>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader>
+  <mat-spinner style="margin: 5rem auto"></mat-spinner>
+</ng-template>

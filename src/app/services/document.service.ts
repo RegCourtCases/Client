@@ -25,4 +25,11 @@ export class DocumentService {
       environment.apiUrl + '/Documents/PlainDocument?id=' + id
     );
   }
+
+  createOrEditDocument(document: Document): Observable<any> {
+    return this.http.post<any>(
+      environment.apiUrl + '/Documents/CreateOrEdit',
+      document
+    );
+  }
 }

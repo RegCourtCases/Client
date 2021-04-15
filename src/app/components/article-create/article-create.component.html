@@ -1,4 +1,4 @@
-<h1>Добавление статьи в документ УК РФ</h1>
+<h1>Добавление статьи в документ</h1>
 
 <form [formGroup]="form">
   <mat-form-field appearance="outline" class="mr-16">
@@ -22,6 +22,7 @@
       color="primary"
       [disabled]="form.invalid"
       class="mt-16"
+      (click)="create()"
     >
       Добавить
     </button>

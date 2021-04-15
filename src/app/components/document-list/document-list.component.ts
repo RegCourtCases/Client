@@ -25,4 +25,8 @@ export class DocumentListComponent implements OnInit {
         this.documents = d;
       });
   }
+
+  delete(documentId: number) {
+    this.documents = this.documents.filter((d) => d.documentId !== documentId);
+  }
 }

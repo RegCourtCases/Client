@@ -7,7 +7,7 @@
       <input
         matInput
         readonly
-        [value]="form.controls.isLegal.value === 0 ? 'Физ. лицо' : 'Юр. лицо'"
+        [value]="form.controls.isLegal.value ? 'Юр. лицо' : 'Физ. лицо'"
       />
     </mat-form-field>
 
@@ -34,7 +34,7 @@
     <mat-form-field
       appearance="outline"
       class="mr-16"
-      *ngIf="form.controls.isLegal.value === 0"
+      *ngIf="!form.controls.isLegal.value"
     >
       <mat-label>Паспортные данные</mat-label>
       <input matInput formControlName="passportData" />
@@ -43,7 +43,7 @@
     <mat-form-field
       appearance="outline"
       class="mr-16"
-      *ngIf="form.controls.isLegal.value === 0"
+      *ngIf="!form.controls.isLegal.value"
     >
       <mat-label>Дата рождения</mat-label>
       <input matInput formControlName="dateBirth" type="date" emptyToNull />

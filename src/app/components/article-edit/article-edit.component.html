@@ -1,1 +1,34 @@
-<p>article-edit works! {{ documentId }} {{ articleId }}</p>
+<h1>Изменение статьи в документе</h1>
+<ng-container *ngIf="loaded; else loader">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>Заголовок</mat-label>
+      <input matInput required formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Текст</mat-label>
+      <textarea matInput required formControlName="text"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mr-16">
+      <mat-label>Класс экспертиз</mat-label>
+      <input matInput formControlName="expertiseClass" />
+    </mat-form-field>
+
+    <div>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="form.invalid"
+        class="mt-16"
+        (click)="edit()"
+      >
+        Изменить
+      </button>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader>
+  <mat-spinner style="margin: 5rem auto"></mat-spinner>
+</ng-template>

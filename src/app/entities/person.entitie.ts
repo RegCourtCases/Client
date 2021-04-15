@@ -6,6 +6,6 @@ export class Person {
   tin!: number;
   isLegal!: false;
   passportData!: number;
-  dateBirth!: Date;
+  dateBirth!: string;
   personTypes: any;
 }
