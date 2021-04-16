@@ -20,7 +20,7 @@
       <button
         mat-flat-button
         color="primary"
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || form.pristine"
         class="mt-16"
         (click)="edit()"
       >

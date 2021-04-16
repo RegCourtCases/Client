@@ -1,13 +1,27 @@
 export class CourtCase {
   courtCaseId!: number;
-  typeCase!: number;
-  typeLegalProceedings!: number;
+  typeCase!: TypeCase;
+  typeLegalProceedings!: TypeLegalProceedings;
   dateReceiptPrimaryDocument!: string;
   basisIntroductionCriminalCase!: number;
-  dateProductionEnd!: number;
-  dateEffectiveDecision!: number;
+  dateProductionEnd!: string;
+  dateEffectiveDecision!: string;
   subjectDispute!: string;
   basisDispute!: string;
   resultDispute!: number;
   directionDispute!: number;
+}
+
+export enum TypeCase {
+  'Уголовное',
+  'Административное',
+  'Гражданское',
+}
+
+export enum TypeLegalProceedings {
+  'Конституционное',
+  'Уголовное',
+  'Гражданское',
+  'Арбитражное',
+  'Административное',
 }

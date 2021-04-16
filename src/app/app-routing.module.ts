@@ -13,6 +13,7 @@ import { PersonCreateComponent } from './components/person-create/person-create.
 import { PersonEditComponent } from './components/person-edit/person-edit.component';
 import { PersonListComponent } from './components/person-list/person-list.component';
 import { PersonViewComponent } from './components/person-view/person-view.component';
+import { CourtCasesViewComponent } from './court-cases-view/court-cases-view.component';
 
 const routes: Routes = [
   {
@@ -49,8 +50,12 @@ const routes: Routes = [
         component: CourtCasesCreateComponent,
       },
       {
-        path: 'edit/:categoryName',
+        path: 'edit/:courtCaseId',
         component: CourtCasesEditComponent,
+      },
+      {
+        path: 'view/:courtCaseId',
+        component: CourtCasesViewComponent,
       },
       { path: '**', redirectTo: 'courtcases', pathMatch: 'prefix' },
     ],

@@ -40,6 +40,8 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { DocumentService } from './services/document.service';
 import { EmptyToNullDirective } from './directives/empty-to-null.directive';
 import { ArticleService } from './services/article.service';
+import { CourtSaseService } from './services/court-case.service';
+import { CourtCasesViewComponent } from './court-cases-view/court-cases-view.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { ArticleService } from './services/article.service';
     ArticleListComponent,
     ArticleEditComponent,
     EmptyToNullDirective,
+    CourtCasesViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,13 @@ import { ArticleService } from './services/article.service';
     HttpClientModule,
     VirtualScrollerModule,
   ],
-  providers: [DatePipe, PersonService, DocumentService, ArticleService],
+  providers: [
+    DatePipe,
+    PersonService,
+    DocumentService,
+    ArticleService,
+    CourtSaseService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

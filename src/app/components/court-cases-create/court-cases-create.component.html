@@ -1,1 +1,116 @@
-<p>court-cases-create works!</p>
+<h1>Добавление дела</h1>
+
+<form [formGroup]="form">
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Тип дела</mat-label>
+    <mat-select formControlName="typeCase" required>
+      <mat-option [value]="0">Уголовное</mat-option>
+      <mat-option [value]="1">Административное</mat-option>
+      <mat-option [value]="2">Гражданское</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Вид судопроизводства</mat-label>
+    <mat-select formControlName="typeLegalProceedings" required>
+      <mat-option [value]="0">Конституционное</mat-option>
+      <mat-option [value]="1">Уголовное</mat-option>
+      <mat-option [value]="2">Гражданское</mat-option>
+      <mat-option [value]="3">Арбитражное</mat-option>
+      <mat-option [value]="4">Административное</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Дата поступления дела</mat-label>
+    <input
+      matInput
+      formControlName="dateReceiptPrimaryDocument"
+      type="date"
+      emptyToNull
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Дата окончания производства</mat-label>
+    <input
+      matInput
+      formControlName="dateProductionEnd"
+      type="date"
+      emptyToNull
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Дата вступления в силу решения</mat-label>
+    <input
+      matInput
+      formControlName="dateEffectiveDecision"
+      type="date"
+      emptyToNull
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field
+    appearance="outline"
+    class="mr-16"
+    *ngIf="form.controls.typeCase.value === 0"
+  >
+    <mat-label>Основание ведения уголовного дела</mat-label>
+    <mat-select formControlName="basisIntroductionCriminalCase">
+      <mat-option [value]="0">Явка с повинной</mat-option>
+      <mat-option [value]="1"
+        >Рапорт об обнаружение признаков преступления</mat-option
+      >
+      <mat-option [value]="2">Сообщение из других источников</mat-option>
+      <mat-option [value]="3">Письменное заявление о преступлении</mat-option>
+      <mat-option [value]="4">Устное заявление о преступлении</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br />
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Предмет спора</mat-label>
+    <textarea matInput formControlName="subjectDispute" emptyToNull></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Основание спора</mat-label>
+    <textarea matInput formControlName="basisDispute" emptyToNull></textarea>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Результат спора</mat-label>
+    <mat-select formControlName="resultDispute">
+      <mat-option [value]="0">Выиграли</mat-option>
+      <mat-option [value]="1">Проиграли</mat-option>
+      <mat-option [value]="2">Выиграли частично</mat-option>
+      <mat-option [value]="3">Арбитражное</mat-option>
+      <mat-option [value]="4">Административное</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="mr-16">
+    <mat-label>Направление спора</mat-label>
+    <mat-select formControlName="directionDispute">
+      <mat-option [value]="0">Не определено</mat-option>
+      <mat-option [value]="1">Входящее</mat-option>
+      <mat-option [value]="2">Исходящее</mat-option>
+      <mat-option [value]="3">Третья сторона</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="form.invalid"
+      class="mt-16"
+      (click)="create()"
+    >
+      Добавить
+    </button>
+  </div>
+</form>
