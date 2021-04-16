@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { CourtCase } from '../entities/court-case.entitie';
 
 @Injectable()
-export class CourtSaseService {
+export class CourtCaseService {
   constructor(private http: HttpClient) {}
 
   getCourtCases(): Observable<CourtCase[]> {

@@ -1,0 +1,6 @@
+<h1>Просмотр дела №{{ courtCaseId }}</h1>
+
+<ng-container *ngIf="loaded; else loader"></ng-container>
+<ng-template #loader>
+  <mat-spinner style="margin: 5rem auto"></mat-spinner>
+</ng-template>

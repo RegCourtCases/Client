@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CourtSaseService } from 'src/app/services/court-case.service';
+import { CourtCaseService } from 'src/app/services/court-case.service';
 
 @Component({
   selector: 'app-court-cases-create',
@@ -25,13 +25,13 @@ export class CourtCasesCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private courtSaseService: CourtSaseService
+    private courtCaseService: CourtCaseService
   ) {}
 
   ngOnInit(): void {}
 
   create() {
-    this.courtSaseService.createOrEdit(this.form.value).subscribe((r) => {
+    this.courtCaseService.createOrEdit(this.form.value).subscribe((r) => {
       this.router.navigate(['/courtcase/view', r.id]);
     });
   }

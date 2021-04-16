@@ -5,7 +5,7 @@ import {
   TypeCase,
   TypeLegalProceedings,
 } from 'src/app/entities/court-case.entitie';
-import { CourtSaseService } from 'src/app/services/court-case.service';
+import { CourtCaseService } from 'src/app/services/court-case.service';
 
 @Component({
   selector: 'app-court-cases-list',
@@ -17,18 +17,24 @@ export class CourtCasesListComponent implements OnInit {
   TypeCase = TypeCase;
   TypeLegalProceedings = TypeLegalProceedings;
 
-  constructor(private courtSaseService: CourtSaseService) {}
+  constructor(private courtCaseService: CourtCaseService) {}
 
   ngOnInit(): void {
     this.getCourtCases();
   }
 
   getCourtCases() {
-    this.courtSaseService
+    this.courtCaseService
       .getCourtCases()
       .pipe(take(1))
       .subscribe((c) => {
         this.courtCases = c;
       });
+  }
+
+  delete(courtCaseId: number) {
+    this.courtCases = this.courtCases.filter(
+      (c) => c.courtCaseId != courtCaseId
+    );
   }
 }

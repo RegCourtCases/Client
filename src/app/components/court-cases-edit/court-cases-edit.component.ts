@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { CourtSaseService } from 'src/app/services/court-case.service';
+import { CourtCaseService } from 'src/app/services/court-case.service';
 
 @Component({
   selector: 'app-court-cases-edit',
@@ -29,7 +29,7 @@ export class CourtCasesEditComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private courtSaseService: CourtSaseService
+    private courtCaseService: CourtCaseService
   ) {
     this.route.params
       .pipe(take(1))
@@ -43,7 +43,7 @@ export class CourtCasesEditComponent implements OnInit {
   }
 
   getCourtCase() {
-    this.courtSaseService
+    this.courtCaseService
       .getCourtCasePlane(this.form.value.courtCaseId)
       .subscribe((c) => {
         c.dateReceiptPrimaryDocument = c.dateReceiptPrimaryDocument.slice(0, 10);
@@ -56,7 +56,7 @@ export class CourtCasesEditComponent implements OnInit {
   }
 
   edit() {
-    this.courtSaseService.createOrEdit(this.form.value).subscribe((r) => {
+    this.courtCaseService.createOrEdit(this.form.value).subscribe((r) => {
       this.router.navigate(['/courtcase/view', r.id]);
     });
   }

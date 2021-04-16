@@ -13,7 +13,7 @@ import { PersonCreateComponent } from './components/person-create/person-create.
 import { PersonEditComponent } from './components/person-edit/person-edit.component';
 import { PersonListComponent } from './components/person-list/person-list.component';
 import { PersonViewComponent } from './components/person-view/person-view.component';
-import { CourtCasesViewComponent } from './court-cases-view/court-cases-view.component';
+import { CourtCasesViewComponent } from './components/court-cases-view/court-cases-view.component';
 
 const routes: Routes = [
   {
