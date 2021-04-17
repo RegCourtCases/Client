@@ -1,0 +1,7 @@
+<h1>Добавление сотрудника к делу №{{ courtCaseId }}</h1>
+<div>
+  <form [formGroup]="form"></form>
+  <button mat-flat-button color="primary" [disabled]="form.invalid">
+    Добавить
+  </button>
+</div>

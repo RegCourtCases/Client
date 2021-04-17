@@ -1,0 +1,146 @@
+<h1>Добавление производства к делу №{{ courtCaseId }}</h1>
+<div>
+  <form
+    [formGroup]="form"
+    style="
+      justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 434px;
+    "
+  >
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Тип инстанции</mat-label>
+      <mat-select formControlName="typeInstance" required>
+        <mat-option [value]="0">Первая</mat-option>
+        <mat-option [value]="1">Апелляция</mat-option>
+        <mat-option [value]="2">Кассация</mat-option>
+        <mat-option [value]="3">Надзор (субъект)</mat-option>
+        <mat-option [value]="4">Надзор (верховный суд)</mat-option>
+        <mat-option [value]="5">Исполнительное производство</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Наименование суда</mat-label>
+        <input matInput formControlName="nameCourt" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>ФИО судьи</mat-label>
+        <input matInput formControlName="judge" required />
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Дата искового заявления</mat-label>
+        <input
+          matInput
+          formControlName="dateStatementClaim"
+          type="date"
+          emptyToNull
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Дата возбуждения производства</mat-label>
+        <input
+          matInput
+          formControlName="dateInitiationProceedings"
+          type="date"
+          emptyToNull
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Сумма иска</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="claimAmount"
+          emptyToNull
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Гос. пошлина</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="stateDuties"
+          emptyToNull
+        />
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Описание иска</mat-label>
+      <textarea
+        matInput
+        type="number"
+        formControlName="descriptionСlaim"
+        emptyToNull
+      ></textarea>
+    </mat-form-field>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Тип решения </mat-label>
+        <mat-select formControlName="solutionType">
+          <mat-option [value]="null"></mat-option>
+          <mat-option [value]="0">Прочее</mat-option>
+          <mat-option [value]="1"
+            >Удовлетворить частично или полностью</mat-option
+          >
+          <mat-option [value]="2">Отказать в иске полностью</mat-option>
+          <mat-option [value]="3"
+            >Оставить исковое заявление без рассмотрения</mat-option
+          >
+          <mat-option [value]="4">Иск удовлетворен</mat-option>
+          <mat-option [value]="5">Иск удовлетворен частично</mat-option>
+          <mat-option [value]="6">Возвратить исковое заявление</mat-option>
+          <mat-option [value]="7">Мировое соглашение</mat-option>
+          <mat-option [value]="8"
+            >Прекращено в связи с отказом от иска</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Сумма по судебному акту</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="amountJudicialAct"
+          emptyToNull
+        />
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Дата решения</mat-label>
+        <input
+          matInput
+          formControlName="dateDecision"
+          type="date"
+          emptyToNull
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Дата вступления решения в силу</mat-label>
+        <input
+          matInput
+          formControlName="dateEffectiveDecision"
+          type="date"
+          emptyToNull
+        />
+      </mat-form-field>
+    </div>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
+    Добавить
+  </button>
+</div>

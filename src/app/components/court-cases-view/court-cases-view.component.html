@@ -1,6 +1,151 @@
-<h1>Просмотр дела №{{ courtCaseId }}</h1>
+<div class="d-flex">
+  <h1 class="m-0">Просмотр дела №{{ courtCaseId }}</h1>
+  <button
+    mat-mini-fab
+    color="accent"
+    class="ml-8"
+    [routerLink]="['/courtcase/edit/', courtCaseId]"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>
+<br />
+<ng-container *ngIf="loaded; else loader">
+  Тип дела: <b>{{ TypeCase[courtCase.typeCase] }}</b
+  ><br />
+  Вид судопроизводства:
+  <b>{{ TypeLegalProceedings[courtCase.typeLegalProceedings] }}</b
+  ><br />
+  Дата поступления дела:&nbsp;<b>{{
+    courtCase.dateReceiptPrimaryDocument | date: "dd.MM.y"
+  }}</b
+  ><br />
+  <ng-container *ngIf="courtCase.dateProductionEnd"
+    >Дата завершения дела:
+    <b>{{ courtCase.dateProductionEnd | date: "dd.MM.y" }}</b
+    ><br
+  /></ng-container>
+  <ng-container *ngIf="courtCase.dateEffectiveDecision"
+    >Дата вступления в силу решения:
+    <b>{{ courtCase.dateEffectiveDecision | date: "dd.MM.y" }}</b
+    ><br
+  /></ng-container>
+  <ng-container
+    *ngIf="
+      courtCase.typeCase === 0 &&
+      courtCase.basisIntroductionCriminalCase !== null
+    "
+    >Основание ведения уголовного дела:
+    <b>{{
+      BasisIntroductionCriminalCase[courtCase.basisIntroductionCriminalCase]
+    }}</b
+    ><br
+  /></ng-container>
 
-<ng-container *ngIf="loaded; else loader"></ng-container>
+  <ng-container *ngIf="courtCase.subjectDispute"
+    >Предмет спора: <b>{{ courtCase.subjectDispute }}</b
+    ><br
+  /></ng-container>
+
+  <ng-container *ngIf="courtCase.basisDispute"
+    >Основание спора: <b>{{ courtCase.basisDispute }}</b
+    ><br
+  /></ng-container>
+
+  <ng-container *ngIf="courtCase.resultDispute !== null"
+    >Результат спора: <b>{{ ResultDispute[courtCase.resultDispute] }}</b
+    ><br
+  /></ng-container>
+
+  <ng-container *ngIf="courtCase.directionDispute !== null"
+    >Направление спора: <b>{{ DirectionDispute[courtCase.resultDispute] }}</b
+    ><br
+  /></ng-container>
+
+  <br />
+  <div class="d-flex">
+    <div style="width: 100%">
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Производство</h2>
+        <button mat-icon-button (click)="openAddProduction()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <br />
+  <div class="d-flex">
+    <div style="width: 33%">
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Сотрудники</h2>
+        <button mat-icon-button (click)="openAddEmployeeCase()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div style="width: 33%">
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Следователи</h2>
+        <button mat-icon-button (click)="openAddInspectorsCase()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+    <div>
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Статьи</h2>
+        <button mat-icon-button (click)="openAddArticleCase()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <br />
+  <div class="d-flex">
+    <div style="width: 50%">
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Участники</h2>
+        <button mat-icon-button (click)="openAddCaseParticipant()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+    <div>
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Эпизоды</h2>
+        <button mat-icon-button (click)="openAddEpisode()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <br />
+  <div class="d-flex">
+    <div style="width: 50%">
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Вещи по делу</h2>
+        <button mat-icon-button (click)="openAddThingCase()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+    <div>
+      <div class="d-flex mb-16">
+        <h2 class="m-0 mr-16">Экспертизы</h2>
+        <button mat-icon-button (click)="openAddExpertise()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</ng-container>
 <ng-template #loader>
   <mat-spinner style="margin: 5rem auto"></mat-spinner>
 </ng-template>

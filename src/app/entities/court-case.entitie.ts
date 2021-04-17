@@ -3,13 +3,13 @@ export class CourtCase {
   typeCase!: TypeCase;
   typeLegalProceedings!: TypeLegalProceedings;
   dateReceiptPrimaryDocument!: string;
-  basisIntroductionCriminalCase!: number;
+  basisIntroductionCriminalCase!: BasisIntroductionCriminalCase;
   dateProductionEnd!: string;
   dateEffectiveDecision!: string;
   subjectDispute!: string;
   basisDispute!: string;
-  resultDispute!: number;
-  directionDispute!: number;
+  resultDispute!: ResultDispute;
+  directionDispute!: DirectionDispute;
 }
 
 export enum TypeCase {
@@ -24,4 +24,38 @@ export enum TypeLegalProceedings {
   'Гражданское',
   'Арбитражное',
   'Административное',
+}
+
+export enum ResultDispute {
+  'Выиграли',
+  'Проиграли',
+  'Выиграли частично',
+}
+
+export enum DirectionDispute {
+  'Не определено',
+  'Входящее',
+  'Исходящее',
+  'Третья сторона',
+}
+
+export enum BasisIntroductionCriminalCase {
+  'Явка с повинной',
+  'Рапорт об обнаружение признаков преступления',
+  'Сообщение из других источников',
+  'Письменное заявление о преступлении',
+  'Устное заявление о преступлении',
+}
+
+export enum TypeInstance {
+  'Первая',
+  'Апелляция',
+  'Кассация',
+  'Надзор (субъект)',
+  'Надзор (верховный суд)',
+  'Исполнительное производство',
+}
+
+export enum SolutionType {
+  
 }

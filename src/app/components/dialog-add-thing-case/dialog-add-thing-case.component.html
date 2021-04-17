@@ -1,0 +1,58 @@
+<h1>Добавление вещей к делу №{{ courtCaseId }}</h1>
+<div>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Наименование</mat-label>
+      <input matInput formControlName="name" required /> </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Владелец</mat-label>
+      <input
+        matInput
+        formControlName="ownerId"
+        required
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn.bind(this)"
+      >
+        <mat-option
+          *ngFor="let person of filteredPersons | async"
+          [value]="person.personId"
+        >
+          {{ person.fullName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Описание</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        emptyToNull
+      ></textarea></mat-form-field
+    ><br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Место хранения</mat-label>
+      <textarea
+        matInput
+        formControlName="storageLocation"
+        emptyToNull
+      ></textarea></mat-form-field
+    ><br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Ссылка на файл</mat-label>
+      <input matInput formControlName="fileLink" emptyToNull />
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
+    Добавить
+  </button>
+</div>

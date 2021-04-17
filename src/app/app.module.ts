@@ -42,6 +42,15 @@ import { EmptyToNullDirective } from './directives/empty-to-null.directive';
 import { ArticleService } from './services/article.service';
 import { CourtCaseService } from './services/court-case.service';
 import { CourtCasesViewComponent } from './components/court-cases-view/court-cases-view.component';
+import { DialogAddEpisodeComponent } from './components/dialog-add-episode/dialog-add-episode.component';
+import { DialogAddExpertiseComponent } from './components/dialog-add-expertise/dialog-add-expertise.component';
+import { DialogAddThingCaseComponent } from './components/dialog-add-thing-case/dialog-add-thing-case.component';
+import { DialogAddProductionComponent } from './components/dialog-add-production/dialog-add-production.component';
+import { DialogAddCaseParticipantComponent } from './components/dialog-add-case-participant/dialog-add-case-participant.component';
+import { DialogAddArticleCaseComponent } from './components/dialog-add-article-case/dialog-add-article-case.component';
+import { DialogAddInspectorsCaseComponent } from './components/dialog-add-inspectors-case/dialog-add-inspectors-case.component';
+import { DialogAddEmployeeCaseComponent } from './components/dialog-add-employee-case/dialog-add-employee-case.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -61,6 +70,14 @@ import { CourtCasesViewComponent } from './components/court-cases-view/court-cas
     ArticleEditComponent,
     EmptyToNullDirective,
     CourtCasesViewComponent,
+    DialogAddEpisodeComponent,
+    DialogAddExpertiseComponent,
+    DialogAddThingCaseComponent,
+    DialogAddProductionComponent,
+    DialogAddCaseParticipantComponent,
+    DialogAddArticleCaseComponent,
+    DialogAddInspectorsCaseComponent,
+    DialogAddEmployeeCaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +99,7 @@ import { CourtCasesViewComponent } from './components/court-cases-view/court-cas
     MatProgressSpinnerModule,
     HttpClientModule,
     VirtualScrollerModule,
+    MatAutocompleteModule,
   ],
   providers: [
     DatePipe,

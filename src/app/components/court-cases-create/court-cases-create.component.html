@@ -60,6 +60,7 @@
   >
     <mat-label>Основание ведения уголовного дела</mat-label>
     <mat-select formControlName="basisIntroductionCriminalCase">
+      <mat-option [value]="null"></mat-option>
       <mat-option [value]="0">Явка с повинной</mat-option>
       <mat-option [value]="1"
         >Рапорт об обнаружение признаков преступления</mat-option
@@ -85,16 +86,16 @@
   <mat-form-field appearance="outline" class="mr-16">
     <mat-label>Результат спора</mat-label>
     <mat-select formControlName="resultDispute">
+      <mat-option [value]="null"></mat-option>
       <mat-option [value]="0">Выиграли</mat-option>
       <mat-option [value]="1">Проиграли</mat-option>
       <mat-option [value]="2">Выиграли частично</mat-option>
-      <mat-option [value]="3">Арбитражное</mat-option>
-      <mat-option [value]="4">Административное</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline" class="mr-16">
     <mat-label>Направление спора</mat-label>
     <mat-select formControlName="directionDispute">
+      <mat-option [value]="null"></mat-option>
       <mat-option [value]="0">Не определено</mat-option>
       <mat-option [value]="1">Входящее</mat-option>
       <mat-option [value]="2">Исходящее</mat-option>
