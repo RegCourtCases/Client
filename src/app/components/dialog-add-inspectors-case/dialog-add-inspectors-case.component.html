@@ -1,7 +1,33 @@
 <h1>Добавление следователя к делу №{{ courtCaseId }}</h1>
 <div>
-  <form [formGroup]="form"></form>
-  <button mat-flat-button color="primary" [disabled]="form.invalid">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Следователь</mat-label>
+      <input
+        matInput
+        formControlName="personId"
+        required
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn.bind(this)"
+      >
+        <mat-option
+          *ngFor="let person of filteredPersons | async"
+          [value]="person.personId"
+        >
+          {{ person.fullName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
     Добавить
   </button>
 </div>

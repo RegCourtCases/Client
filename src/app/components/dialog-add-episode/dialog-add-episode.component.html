@@ -1,7 +1,69 @@
 <h1>Добавление эпизода к делу №{{ courtCaseId }}</h1>
 <div>
-  <form [formGroup]="form"></form>
-  <button mat-flat-button color="primary" [disabled]="form.invalid">
+  <form
+    [formGroup]="form"
+    style="
+      justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 434px;
+    "
+  >
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Рабочие название</mat-label>
+      <input matInput formControlName="workingTitle" required />
+    </mat-form-field>
+    <div>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Категория преступления</mat-label>
+        <input matInput formControlName="categoryCrime" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Вид преступления</mat-label>
+        <input matInput formControlName="typeCrime" required />
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Дата начала</mat-label>
+        <input matInput formControlName="dateStartCrime" type="date" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Дата конца</mat-label>
+        <input matInput formControlName="dateEndCrime" type="date" required />
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Место преступления</mat-label>
+        <input matInput formControlName="placeCrime" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Мотив преступления</mat-label>
+        <input matInput formControlName="motiveCrime" />
+      </mat-form-field>
+    </div>
+    <div style="width: 100%">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Цель преступления</mat-label>
+        <input matInput formControlName="purposeCrime" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Орудие</mat-label>
+        <input matInput formControlName="toolCrime" />
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Заметки</mat-label>
+      <textarea matInput formControlName="notes"></textarea>
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
     Добавить
   </button>
 </div>

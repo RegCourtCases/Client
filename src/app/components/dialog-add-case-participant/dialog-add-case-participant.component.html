@@ -1,7 +1,47 @@
 <h1>Добавление участника к делу №{{ courtCaseId }}</h1>
 <div>
-  <form [formGroup]="form"></form>
-  <button mat-flat-button color="primary" [disabled]="form.invalid">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Лицо</mat-label>
+      <input
+        matInput
+        formControlName="personId"
+        required
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn.bind(this)"
+      >
+        <mat-option
+          *ngFor="let person of filteredPersons | async"
+          [value]="person.personId"
+        >
+          {{ person.fullName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Роль</mat-label>
+      <mat-select formControlName="role" required>
+        <mat-option [value]="0">Подозреваемый</mat-option>
+        <mat-option [value]="1">Пострадавший</mat-option>
+        <mat-option [value]="2">Свидетель</mat-option>
+        <mat-option [value]="3">Обвиняемый</mat-option>
+      </mat-select> </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Место работы</mat-label>
+      <input matInput formControlName="placeWork" emptyToNull />
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
     Добавить
   </button>
 </div>
