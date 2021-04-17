@@ -5,46 +5,38 @@ import { Observable } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 import { Person } from 'src/app/entities/person.entitie';
 import { CourtCaseService } from 'src/app/services/court-case.service';
-import { PersonService } from 'src/app/services/person.service';
 
 @Component({
-  selector: 'app-dialog-add-inspectors-case',
-  templateUrl: './dialog-add-inspectors-case.component.html',
-  styleUrls: ['./dialog-add-inspectors-case.component.scss'],
+  selector: 'app-dialog-add-instigator-prpduction',
+  templateUrl: './dialog-add-instigator-prpduction.component.html',
+  styleUrls: ['./dialog-add-instigator-prpduction.component.scss'],
 })
-export class DialogAddInspectorsCaseComponent implements OnInit {
+export class DialogAddInstigatorPrpductionComponent implements OnInit {
+  public form: FormGroup = this.fb.group({
+    productionId: [null],
+    personId: [null, [Validators.required]],
+  });
+
+  public type = 0;
+
   public persons!: Person[];
   public filteredPersons!: Observable<any[]>;
 
-  public form: FormGroup = this.fb.group({
-    courtCaseId: [null],
-    personId: [null, [Validators.required]],
-  });
   constructor(
-    public dialogRef: MatDialogRef<DialogAddInspectorsCaseComponent>,
-    @Inject(MAT_DIALOG_DATA) public courtCaseId: number,
+    public dialogRef: MatDialogRef<DialogAddInstigatorPrpductionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private personService: PersonService,
     private courtCaseService: CourtCaseService
   ) {
-    this.form.controls.courtCaseId.setValue(+this.courtCaseId);
+    this.form.controls.productionId.setValue(+data.productionId);
+    this.persons = data.persons;
   }
 
   ngOnInit(): void {
-    this.getPersons();
-  }
-
-  getPersons() {
-    this.personService
-      .getPersons()
-      .pipe(take(1))
-      .subscribe((ps) => {
-        this.persons = ps.filter((p) => !p.isLegal);
-        this.filteredPersons = this.form.controls.personId.valueChanges.pipe(
-          startWith(''),
-          map((value) => this._filter(value))
-        );
-      });
+    this.filteredPersons = this.form.controls.personId.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
   }
 
   private _filter(value: string | number): Person[] {
@@ -64,11 +56,17 @@ export class DialogAddInspectorsCaseComponent implements OnInit {
   }
 
   create() {
-    this.courtCaseService
-      .createOrEditInspectorsCases(this.form.value)
+    const send =
+      this.type == 0
+        ? this.courtCaseService.createOrEditPlaintiffs
+        : this.type == 1
+        ? this.courtCaseService.createOrEditRespondents
+        : this.type == 2
+        ? this.courtCaseService.createOrEditInterestedParties
+        : this.courtCaseService.createOrEditThirdParties;
+
+    send.bind(this.courtCaseService)(this.form.value)
       .pipe(take(1))
-      .subscribe(() => {
-        this.dialogRef.close();
-      });
+      .subscribe(() => this.dialogRef.close());
   }
 }

@@ -1,7 +1,64 @@
 <h1>Добавление экспертизы к делу №{{ courtCaseId }}</h1>
 <div>
-  <form [formGroup]="form"></form>
-  <button mat-flat-button color="primary" [disabled]="form.invalid">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Документ</mat-label>
+      <mat-select
+        [(value)]="documentId"
+        (selectionChange)="getDocument(documentId)"
+        required
+      >
+        <mat-option
+          *ngFor="let document of documents"
+          [value]="document.documentId"
+          >{{ document.fullTitle }}</mat-option
+        >
+      </mat-select> </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Статья</mat-label>
+
+      <input
+        matInput
+        formControlName="articleId"
+        required
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn.bind(this)"
+      >
+        <mat-option
+          *ngFor="let article of articlesFilter | async"
+          [value]="article.articleId"
+        >
+          {{ article.title }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Вопрос эксперту</mat-label>
+      <input matInput formControlName="question" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Ссылка на файл</mat-label>
+      <input matInput formControlName="fileLink" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Дата заключения</mat-label>
+      <input matInput formControlName="dateConclusion" type="date" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Статус заключения</mat-label>
+      <input matInput formControlName="conclusionStatus" required />
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
     Добавить
   </button>
 </div>

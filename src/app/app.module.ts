@@ -51,6 +51,8 @@ import { DialogAddArticleCaseComponent } from './components/dialog-add-article-c
 import { DialogAddInspectorsCaseComponent } from './components/dialog-add-inspectors-case/dialog-add-inspectors-case.component';
 import { DialogAddEmployeeCaseComponent } from './components/dialog-add-employee-case/dialog-add-employee-case.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DialogEditProductionComponent } from './components/dialog-edit-production/dialog-edit-production.component';
+import { DialogAddInstigatorPrpductionComponent } from './components/dialog-add-instigator-prpduction/dialog-add-instigator-prpduction.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DialogAddArticleCaseComponent,
     DialogAddInspectorsCaseComponent,
     DialogAddEmployeeCaseComponent,
+    DialogEditProductionComponent,
+    DialogAddInstigatorPrpductionComponent,
   ],
   imports: [
     BrowserModule,

@@ -71,17 +71,111 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div
+          class="d-flex mt-16"
+          *ngFor="let production of courtCase.productions"
+        >
+          <div style="width: 100%">
+            <span
+              class="fake-a"
+              (click)="openEditProduction(production.productionId)"
+              >Изменить</span
+            >&nbsp;&nbsp;&nbsp;<span
+              class="fake-a"
+              title="Добавить Истца/Ответчика/Третье лицо/Заинтересованное лицо"
+              (click)="openAddInstigatorProduction(production.productionId)"
+              >Добавить</span
+            >&nbsp;&nbsp;&nbsp;
+            <span class="fake-a">Удалить</span>
+          </div>
+          <div>
+            №{{ production.productionId }}&nbsp; Тип инстанции:&nbsp;<b>{{
+              TypeInstance[production.typeInstance]
+            }}</b
+            >&nbsp; Суд:&nbsp;<b>{{ production.nameCourt }}</b
+            >&nbsp; Судья:&nbsp;<b>{{ production.judge }}</b
+            >&nbsp; Дата иска:&nbsp;<b>{{
+              production.dateStatementClaim | date: "dd.MM.y"
+            }}</b
+            >&nbsp; Дата возбуждения:&nbsp;<b>{{
+              production.dateInitiationProceedings | date: "dd.MM.y"
+            }}</b
+            >&nbsp;
+            <ng-container *ngIf="production.claimAmount"
+              >Сумма иска:&nbsp;<b>{{ production.claimAmount }}</b
+              >&nbsp;</ng-container
+            >
+            <ng-container *ngIf="production.stateDuties"
+              >Гос. пошлина:&nbsp;<b>{{ production.stateDuties }}</b
+              >&nbsp;</ng-container
+            >
+
+            <ng-container *ngIf="production.descriptionClaim"
+              >Описание иска:&nbsp;<b>{{ production.descriptionClaim }}</b
+              >&nbsp;</ng-container
+            >
+            <ng-container *ngIf="production.solutionType != null"
+              >Тип решения:&nbsp;<b>{{
+                SolutionType[production.solutionType]
+              }}</b
+              >&nbsp;</ng-container
+            >
+            <ng-container *ngIf="production.amountJudicialAct"
+              >Сумма по судебному акту:&nbsp;<b>{{
+                production.amountJudicialAct
+              }}</b
+              >&nbsp;</ng-container
+            >
+            <ng-container *ngIf="production.dateDecision"
+              >Дата решения:&nbsp;<b>{{
+                production.dateDecision | date: "dd.MM.y"
+              }}</b
+              >&nbsp;</ng-container
+            >
+            <ng-container *ngIf="production.dateEffectiveDecision"
+              >Дата вступления в силу:&nbsp;<b>{{
+                production.dateEffectiveDecision | date: "dd.MM.y"
+              }}</b
+              >&nbsp;</ng-container
+            >
+          </div>
+          <div *ngIf="production.plaintiffs.length" style="width: 100%;">
+            Истцы: <ng-container *ngFor="let plaintiff of production.plaintiffs"><b>{{ getPersonFullName(plaintiff.personId) }}</b>&nbsp;<span class="fake-a">X</span>&nbsp;&nbsp;&nbsp;</ng-container>
+          </div>
+          <div *ngIf="production.respondents.length" style="width: 100%;">
+            Ответчики: <ng-container *ngFor="let respondent of production.respondents"><b>{{ getPersonFullName(respondent.personId) }}</b>&nbsp;<span class="fake-a">X</span>&nbsp;&nbsp;&nbsp;</ng-container>
+          </div>
+          <div *ngIf="production.interestedParties.length" style="width: 100%;">
+            Заинтересованные лица: <ng-container *ngFor="let interestedPartie of production.interestedParties"><b>{{ getPersonFullName(interestedPartie.personId) }}</b>&nbsp;<span class="fake-a">X</span>&nbsp;&nbsp;&nbsp;</ng-container>
+          </div>
+          <div *ngIf="production.thirdParties.length" style="width: 100%;">
+            Третье лица: <ng-container *ngFor="let thirdPartie of production.thirdParties"><b>{{ getPersonFullName(thirdPartie.personId) }}</b>&nbsp;<span class="fake-a">X</span>&nbsp;&nbsp;&nbsp;</ng-container>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <br />
-  <div class="d-flex">
+  <div class="d-flex" style="align-items: baseline">
     <div style="width: 33%">
       <div class="d-flex mb-16">
         <h2 class="m-0 mr-16">Сотрудники</h2>
         <button mat-icon-button (click)="openAddEmployeeCase()">
           <mat-icon>add</mat-icon>
         </button>
+      </div>
+      <div>
+        <div
+          class="d-flex mt-16"
+          *ngFor="let employee of courtCase.employeesCases"
+        >
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            ФИО: <b>{{ getEmployeesFullName(employee.employeeId) }}</b
+            ><br />Должность: <b>{{ getEmployeesPost(employee.employeeId) }}</b>
+          </div>
+        </div>
       </div>
     </div>
     <div style="width: 33%">
@@ -91,7 +185,17 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div
+          class="d-flex mt-16"
+          *ngFor="let inspector of courtCase.inspectorsCases"
+        >
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            ФИО: <b>{{ getPersonFullName(inspector.personId) }}</b>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
       <div class="d-flex mb-16">
@@ -100,11 +204,22 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div
+          class="d-flex mt-16 clip"
+          style="max-width: 440px"
+          *ngFor="let articlesCase of courtCase.articlesCases"
+        >
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            {{ articlesCase.article.title }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <br />
-  <div class="d-flex">
+  <div class="d-flex" style="align-items: baseline">
     <div style="width: 50%">
       <div class="d-flex mb-16">
         <h2 class="m-0 mr-16">Участники</h2>
@@ -112,7 +227,17 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div
+          class="d-flex mt-16"
+          *ngFor="let caseParticipant of courtCase.caseParticipants"
+        >
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            ФИО: <b>{{ getPersonFullName(caseParticipant.personId) }}</b>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
       <div class="d-flex mb-16">
@@ -121,11 +246,35 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div class="d-flex mt-16" *ngFor="let episode of courtCase.episodes">
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            Название: <b>{{ episode.workingTitle }}</b
+            ><br />Категория преступления: <b>{{ episode.categoryCrime }}</b
+            >&nbsp;Вид преступления: <b>{{ episode.typeCrime }}</b
+            ><br />Дата начала:
+            <b>{{ episode.dateStartCrime | date: "dd.MM.y" }}</b
+            >&nbsp;Дата Конца:
+            <b>{{ episode.dateEndCrime | date: "dd.MM.y" }}</b
+            >&nbsp;Место: <b>{{ episode.placeCrime }}</b>
+
+            <ng-container *ngIf="episode.purposeCrime != null"
+              ><br />Мотив: <b>{{ episode.purposeCrime }}</b></ng-container
+            >
+            <ng-container *ngIf="episode.toolCrime != null"
+              ><br />Орудие: <b>{{ episode.toolCrime }}</b></ng-container
+            >
+            <ng-container *ngIf="episode.notes != null">
+              <br />Заметки: <b>{{ episode.notes }}</b></ng-container
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <br />
-  <div class="d-flex">
+  <div class="d-flex" style="align-items: baseline">
     <div style="width: 50%">
       <div class="d-flex mb-16">
         <h2 class="m-0 mr-16">Вещи по делу</h2>
@@ -133,7 +282,22 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div
+          class="d-flex mt-16"
+          *ngFor="let thingCase of courtCase.thingsCases"
+        >
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            Наименование: <b>{{ thingCase.name }}</b
+            >&nbsp;Владелец: <b>{{ getPersonFullName(thingCase.ownerId) }}</b
+            ><br />
+            Описание: <b>{{ thingCase.description }}</b
+            ><br />
+            Место хранения: <b>{{ thingCase.storageLocation }}</b>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
       <div class="d-flex mb-16">
@@ -142,7 +306,23 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div></div>
+      <div>
+        <div
+          class="d-flex mt-16"
+          *ngFor="let expertise of courtCase.expertises"
+        >
+          <div style="width: 100%"><span class="fake-a">Удалить</span></div>
+          <div style="width: 100%">
+            {{ expertise.article.title }}
+            Вопрос: <b>{{ expertise.question }}</b
+            ><br />
+            Дата заключения:
+            <b>{{ expertise.dateConclusion | date: "dd.MM.y" }}</b
+            ><br />
+            Статус заключения: <b>{{ expertise.conclusionStatus }}</b>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>

@@ -18,6 +18,10 @@ export class PersonService {
     );
   }
 
+  getEmployees(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/Employees/GetAll');
+  }
+
   createOrEditPerson(person: Person): Observable<any> {
     return this.http.post<any>(
       environment.apiUrl + '/Persons/CreateOrEdit',

@@ -1,0 +1,42 @@
+<h1>Добавить</h1>
+<div>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Тип инстанции</mat-label>
+      <mat-select [(value)]="type" required>
+        <mat-option [value]="0">Истец</mat-option>
+        <mat-option [value]="1">Ответчик</mat-option>
+        <mat-option [value]="2">Заинтересованное лицо</mat-option>
+        <mat-option [value]="3">Третье лицо</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="mr-16" style="width: 100%">
+      <mat-label>Лицо</mat-label>
+      <input
+        matInput
+        formControlName="personId"
+        required
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn.bind(this)"
+      >
+        <mat-option
+          *ngFor="let person of filteredPersons | async"
+          [value]="person.personId"
+        >
+          {{ person.fullName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="create()"
+  >
+    Добавить
+  </button>
+</div>

@@ -5,13 +5,14 @@ import { take } from 'rxjs/operators';
 import { CourtCaseService } from 'src/app/services/court-case.service';
 
 @Component({
-  selector: 'app-dialog-add-production',
-  templateUrl: './dialog-add-production.component.html',
-  styleUrls: ['./dialog-add-production.component.scss'],
+  selector: 'app-dialog-edit-production',
+  templateUrl: './dialog-edit-production.component.html',
+  styleUrls: ['./dialog-edit-production.component.scss'],
 })
-export class DialogAddProductionComponent implements OnInit {
+export class DialogEditProductionComponent implements OnInit {
   public form: FormGroup = this.fb.group({
     courtCaseId: [null],
+    productionId: [null],
     typeInstance: [0, [Validators.required]],
     nameCourt: [null, [Validators.required]],
     judge: [null, [Validators.required]],
@@ -26,17 +27,33 @@ export class DialogAddProductionComponent implements OnInit {
     dateEffectiveDecision: [null],
   });
   constructor(
-    public dialogRef: MatDialogRef<DialogAddProductionComponent>,
-    @Inject(MAT_DIALOG_DATA) public courtCaseId: number,
+    public dialogRef: MatDialogRef<DialogEditProductionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private courtCaseService: CourtCaseService
   ) {
-    this.form.controls.courtCaseId.setValue(+this.courtCaseId);
+    this.form.controls.courtCaseId.setValue(+data.courtCaseId);
+    this.form.controls.productionId.setValue(+data.productionId);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProduction();
+  }
 
-  create() {
+  getProduction() {
+    this.courtCaseService
+      .getProduction(this.data.productionId)
+      .pipe(take(1))
+      .subscribe((p) => {
+        p.dateStatementClaim = p.dateStatementClaim?.slice(0, 10);
+        p.dateInitiationProceedings = p.dateInitiationProceedings?.slice(0, 10);
+        p.dateDecision = p.dateDecision?.slice(0, 10);
+        p.dateEffectiveDecision = p.dateEffectiveDecision?.slice(0, 10);
+        this.form.patchValue(p);
+      });
+  }
+
+  edit() {
     this.courtCaseService
       .createOrEditProductions(this.form.value)
       .pipe(take(1))

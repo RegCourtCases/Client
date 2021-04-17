@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 import { Person } from 'src/app/entities/person.entitie';
+import { CourtCaseService } from 'src/app/services/court-case.service';
 import { PersonService } from 'src/app/services/person.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class DialogAddCaseParticipantComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogAddCaseParticipantComponent>,
     @Inject(MAT_DIALOG_DATA) public courtCaseId: number,
     private fb: FormBuilder,
-    private personService: PersonService
+    private personService: PersonService,
+    private courtCaseService: CourtCaseService
   ) {
     this.form.controls.courtCaseId.setValue(+this.courtCaseId);
   }
@@ -64,6 +66,11 @@ export class DialogAddCaseParticipantComponent implements OnInit {
   }
 
   create() {
-    console.log(this.form.value);
+    this.courtCaseService
+      .createOrEditCaseParticipants(this.form.value)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.dialogRef.close();
+      });
   }
 }

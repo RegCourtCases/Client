@@ -1,4 +1,4 @@
-<h1>Добавление производства к делу №{{ courtCaseId }}</h1>
+<h1>Изменение производства к делу №{{ data.courtCaseId }}</h1>
 <div>
   <form
     [formGroup]="form"
@@ -138,9 +138,9 @@
   <button
     mat-flat-button
     color="primary"
-    [disabled]="form.invalid"
-    (click)="create()"
+    [disabled]="form.invalid || form.pristine"
+    (click)="edit()"
   >
-    Добавить
+    Изменить
   </button>
 </div>

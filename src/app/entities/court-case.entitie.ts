@@ -10,6 +10,15 @@ export class CourtCase {
   basisDispute!: string;
   resultDispute!: ResultDispute;
   directionDispute!: DirectionDispute;
+
+  productions: any;
+  employeesCases: any;
+  inspectorsCases: any;
+  articlesCases: any;
+  caseParticipants: any;
+  episodes: any;
+  thingsCases: any;
+  expertises: any;
 }
 
 export enum TypeCase {
@@ -57,5 +66,13 @@ export enum TypeInstance {
 }
 
 export enum SolutionType {
-  
+  'Прочее',
+  'Удовлетворить частично или полностью',
+  'Отказать в иске полностью',
+  'Оставить исковое заявление без рассмотрения',
+  'Иск удовлетворен',
+  'Иск удовлетворен частично',
+  'Возвратить исковое заявление',
+  'Мировое соглашение',
+  'Прекращено в связи с отказом от иска',
 }
