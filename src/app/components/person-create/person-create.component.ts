@@ -14,7 +14,7 @@ export class PersonCreateComponent implements OnInit {
     fullName: ['', [Validators.required]],
     address: [null],
     tin: [null, [Validators.minLength(8), Validators.maxLength(10)]],
-    isLegal: [0],
+    isLegal: [false],
     passportData: [null, [Validators.minLength(10), Validators.maxLength(10)]],
     dateBirth: [null],
   });
